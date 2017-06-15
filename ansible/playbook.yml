@@ -1,0 +1,22 @@
+---
+- hosts:
+  become: true
+  gather_facts: false
+  tasks:
+
+  - name: Install Apache2
+    apt: name=apache2 state=installed update_cache=yes
+
+  - name: Start Apache Service
+    service: name=apache2 state=started
+
+  - name: Delete index.html
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
+  - name: Copy index.php from github
+    get_url:
+      url: https://github.com/arjun-kundur/sonotel.git
+      dest: /var/www/html/
+      mode: 0664
