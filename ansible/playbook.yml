@@ -4,6 +4,9 @@
   gather_facts: false
   tasks:
 
+  - name: Install python Dependency
+    raw: yum -y install python-simplejson
+
   - name: Install Apache2
     apt: name=apache2 state=installed update_cache=yes
 
